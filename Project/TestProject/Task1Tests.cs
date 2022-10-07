@@ -1,6 +1,6 @@
-namespace ProjectTests
+namespace TestProject
 {
-    public class Task1Tests
+    internal class Task1Tests
     {
         [Test]
         public void GetIntegersFromList_ListWithTwoIntsAndOtherTypes_ReturnsListWithSameInts()
