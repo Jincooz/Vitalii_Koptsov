@@ -10,11 +10,11 @@ namespace SeleniumHomeTask.PageObjects
     internal class LoginPageObject : PageObject
     {
         private static readonly string _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-        private IWebElement UsernameTextBox => _webDriver.FindElement(By.CssSelector("input.oxd-input[name=username]"));
-        private IWebElement PasswordTextBox => _webDriver.FindElement(By.CssSelector("input.oxd-input[name=password]"));
-        private IWebElement UsernameElement => _webDriver.FindElements(By.CssSelector("p.oxd-text"))[0];
-        private IWebElement PasswordElement => _webDriver.FindElements(By.CssSelector("p.oxd-text"))[1];
-        private IWebElement LoginButton => _webDriver.FindElement(By.ClassName("oxd-button"));
+        private IWebElement UsernameTextBox => FindElement(By.CssSelector("input.oxd-input[name=username]"));
+        private IWebElement PasswordTextBox => FindElement(By.CssSelector("input.oxd-input[name=password]"));
+        private IWebElement UsernameElement => FindElements(By.CssSelector("p.oxd-text"))[0];
+        private IWebElement PasswordElement => FindElements(By.CssSelector("p.oxd-text"))[1];
+        private IWebElement LoginButton => FindElement(By.ClassName("oxd-button"));
         public LoginPageObject(IWebDriver webDriver) : base(webDriver, _pageUrl) { }
         public void EnterUsername(string? username = null)
         {
