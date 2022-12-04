@@ -1,4 +1,4 @@
-﻿namespace SeleniumHomeTask.PageObjects.JobTitleListPageObjectr
+﻿namespace SeleniumHomeTask.PageObjects.JobTitleListPageComponents
 {
     internal class JobTableRowPageComponent : PageComponent
     {

@@ -6,7 +6,7 @@
         private IWebElement AddButton => FindElement(By.ClassName("oxd-button"));
         private IWebElement DeleteSelectedButton => FindElement(By.ClassName("oxd-button--label-danger"));
         private IWebElement PopUpWindow => FindElement(By.ClassName("orangehrm-dialog-popup"));
-        private JobTitleListPageObjectr.JobTablePageComponent? JobTable;
+        private JobTitleListPageComponents.JobTablePageComponent? JobTable;
         public JobTitleListPageObject(IWebDriver webDriver) : base(webDriver, _pageUrl) { }
         public SaveJobTitlePageObject ClickAdd()
         {
@@ -31,7 +31,7 @@
         public JobTitleListPageObject DeleteSelected()
         {
             DeleteSelectedButton.Click();
-            new JobTitleListPageObjectr.DeletionPopUpWindowPageComponent(PopUpWindow).ClickDelete();
+            new JobTitleListPageComponents.DeletionPopUpWindowPageComponent(PopUpWindow).ClickDelete();
             return new JobTitleListPageObject(_webDriver);
         }
         private void InitializeJobTable()

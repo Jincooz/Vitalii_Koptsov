@@ -1,14 +1,7 @@
-﻿using NUnit.Framework;
-
-namespace SeleniumHomeTask.PageObjects.JobTitleListPageObjectr
+﻿namespace SeleniumHomeTask.PageObjects.JobTitleListPageComponents
 {
     internal class JobTablePageComponent : PageComponent
     {
-        [OneTimeSetUp]
-        public void Init()
-        {
-            Environment.CurrentDirectory = Path.GetDirectoryName(GetType().Assembly.Location);
-        }
         private List<JobTableRowPageComponent> TableRows { get; set; }
         public JobTablePageComponent(IWebElement webElement) : base(webElement)
         {
