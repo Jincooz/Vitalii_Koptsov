@@ -1,4 +1,6 @@
-﻿namespace SeleniumHomeTask.PageObjects
+﻿using OpenQA.Selenium.Support.UI;
+
+namespace SeleniumHomeTask.PageObjects
 {
     internal abstract class PageObject
     {
@@ -66,6 +68,11 @@
                     return false;
                 }
             });
+        }
+        public void ScrollToTop()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)_webDriver;
+            js.ExecuteScript("window.scrollTo(0, 0)");
         }
         public void Close()
         {
