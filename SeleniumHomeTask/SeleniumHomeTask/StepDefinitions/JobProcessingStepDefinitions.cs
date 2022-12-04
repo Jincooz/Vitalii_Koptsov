@@ -15,7 +15,7 @@ namespace SeleniumHomeTask.StepDefinitions
         [Given(@"a admin on the admin viewJobTitleList page")]
         public void GivenAAdminOnTheAdminViewJobTitleListPage()
         {
-            currentPage = MbFactory.getJobTitleListPageObject(MbFactory.getDriver());
+            currentPage = PageObjectStaticFabric.getJobTitleListPageObject(PageObjectStaticFabric.getDriver());
         }
 
         [Given(@"the admin click on Add button")]
