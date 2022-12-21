@@ -24,6 +24,15 @@ namespace SeleniumHomeTask.StepDefinitions
             currentPage = (currentPage as JobTitleListPageObject).ClickAdd();
         }
 
+        [Given(@"a job with '([^']*)' exist in table")]
+        public void GivenAJobWithExistInTable(string jobTitle)
+        {
+            if (!(currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable().Contains(jobTitle))
+            {
+                CreateJobWithJobTitle(jobTitle);
+            }
+        }
+
         [When(@"the admin saves new job with valid '([^']*)', '([^']*)' and '([^']*)'")]
         public void WhenTheAdminSavesNewJobWithValidAnd(string jobTitle, string jobDescription, string jobNote)
         {
@@ -34,32 +43,6 @@ namespace SeleniumHomeTask.StepDefinitions
             currentPage = page.ClickSave();
         }
 
-        [Then(@"a job with '([^']*)' and with '([^']*)' exist in table")]
-        public void ThenAJobWithAndWithExistInTable(string jobTitle, string jobDescription)
-        {
-            List<string> jobTitles = (currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable();
-            Assert.Contains(jobTitle, jobTitles);
-            string jobDescriptionOnSite = (currentPage as JobTitleListPageObject).GetJobDesctitionByJobTitle(jobTitle);
-            Assert.That(jobDescription.Contains(jobDescriptionOnSite.TrimStart()));
-            currentPage.Close();
-        }
-
-        public void CreateJobWithJobTitle(string jobTitle)
-        {
-            GivenAAdminOnTheAdminViewJobTitleListPage();
-            GivenTheAdminClickOnAddButton();
-            WhenTheAdminSavesNewJobWithValidAnd(jobTitle, "", "");
-        }
-
-        [Given(@"a job with '([^']*)' exist in table")]
-        public void GivenAJobWithExistInTable(string jobTitle)
-        {
-            if (!(currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable().Contains(jobTitle))
-            {
-                CreateJobWithJobTitle(jobTitle);
-            }
-        }
-
         [When(@"the admin delete a job with '([^']*)' through Delete Selected button")]
         public void WhenTheAdminDeleteAJobWithThroughDeleteSelectedButton(string jobTitle)
         {
@@ -68,13 +51,33 @@ namespace SeleniumHomeTask.StepDefinitions
             currentPage = (currentPage as JobTitleListPageObject).DeleteSelected();
         }
 
-        [Then(@"row with '([^']*)' don`t exist in table")]
-        public void ThenRowWithDonTExistInTable(string jobTitle)
+        [Then(@"a job with '([^']*)' and with '([^']*)' exist in table")]
+        public void ThenAJobWithAndWithExistInTable(string jobTitle, string jobDescription)
         {
-            List<string> jobTitles = (currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable();
-            Assert.That(!jobTitles.Contains(jobTitle));
+            Assert.That(RowWithTitleExistInTable(jobTitle));
+            string jobDescriptionOnSite = (currentPage as JobTitleListPageObject).GetJobDesctitionByJobTitle(jobTitle);
+            Assert.That(jobDescription.Contains(jobDescriptionOnSite.TrimStart()));
             currentPage.Close();
         }
 
+        [Then(@"row with '([^']*)' don`t exist in table")]
+        public void ThenRowWithDonTExistInTable(string jobTitle)
+        {
+            Assert.That(!RowWithTitleExistInTable(jobTitle));
+            currentPage.Close();
+        }
+
+        private bool RowWithTitleExistInTable(string jobTitle)
+        {
+            List<string> jobTitles = (currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable();
+            return jobTitles.Contains(jobTitle);
+        }
+
+        private void CreateJobWithJobTitle(string jobTitle)
+        {
+            GivenAAdminOnTheAdminViewJobTitleListPage();
+            GivenTheAdminClickOnAddButton();
+            WhenTheAdminSavesNewJobWithValidAnd(jobTitle, "", "");
+        }
     }
 }
