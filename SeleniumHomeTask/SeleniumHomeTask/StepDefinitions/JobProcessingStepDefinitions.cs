@@ -7,11 +7,7 @@ namespace SeleniumHomeTask.StepDefinitions
     public sealed class JobProcessingStepDefinitions
     {
         private PageObjects.PageObject? currentPage;
-        [OneTimeSetUp]
-        public void Init()
-        {
-            Environment.CurrentDirectory = Path.GetDirectoryName(GetType().Assembly.Location);
-        }
+
         [Given(@"a admin on the admin viewJobTitleList page")]
         public void GivenAAdminOnTheAdminViewJobTitleListPage()
         {
