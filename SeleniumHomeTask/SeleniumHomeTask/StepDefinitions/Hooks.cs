@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SeleniumHomeTask.Drivers;
 
 namespace SeleniumHomeTask.StepDefinitions
 {
     [Binding]
-    internal class Hooks
+    public sealed class Hooks
     {
         [BeforeTestRun]
         public static void SetupAlureDirectory()
@@ -17,7 +13,12 @@ namespace SeleniumHomeTask.StepDefinitions
         [BeforeScenario]
         public static void SetupScenario()
         {
-            DoSomeShit();
+            Driver.StartBrowser();
+        }
+        [AfterScenario]
+        public static void CloseBrowser()
+        {
+            Driver.StopBrowser();
         }
     }
 }
