@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using SeleniumHomeTask.Drivers;
+using SeleniumHomeTask.Features;
 using SeleniumHomeTask.PageObjects;
 
 namespace SeleniumHomeTask.StepDefinitions
@@ -6,24 +8,31 @@ namespace SeleniumHomeTask.StepDefinitions
     [Binding]
     public sealed class JobProcessingStepDefinitions
     {
-        private PageObjects.PageObject? currentPage;
+        private JobTitleListPageObject? jobTitleList;
+        private SaveJobTitlePageObject? saveJobTitleList;
 
         [Given(@"a admin on the admin viewJobTitleList page")]
         public void GivenAAdminOnTheAdminViewJobTitleListPage()
         {
-            currentPage = PageObjectStaticFabric.getJobTitleListPageObject(PageObjectStaticFabric.getDriver());
+            var loginPage = PageObjectStaticFabric.getLoginPageObject(Driver.Browser);
+            loginPage.GoTo();
+            loginPage.EnterUsername();
+            loginPage.EnterPassword();
+            DashboardPageObject dashboardPage = loginPage.ClickLogin();
+            SystemUsersPageObject systemUsersPage = dashboardPage.GoToAdminPage();
+            jobTitleList = systemUsersPage.OpenJobTitleList();
         }
 
         [Given(@"the admin click on Add button")]
         public void GivenTheAdminClickOnAddButton()
         {
-            currentPage = (currentPage as JobTitleListPageObject).ClickAdd();
+            saveJobTitleList = jobTitleList.ClickAdd();
         }
 
         [Given(@"a job with '([^']*)' exist in table")]
         public void GivenAJobWithExistInTable(string jobTitle)
         {
-            if (!(currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable().Contains(jobTitle))
+            if (!(jobTitleList).GetListOfJobTitlesInTable().Contains(jobTitle))
             {
                 CreateJobWithJobTitle(jobTitle);
             }
@@ -32,40 +41,37 @@ namespace SeleniumHomeTask.StepDefinitions
         [When(@"the admin saves new job with valid '([^']*)', '([^']*)' and '([^']*)'")]
         public void WhenTheAdminSavesNewJobWithValidAnd(string jobTitle, string jobDescription, string jobNote)
         {
-            SaveJobTitlePageObject page = (currentPage as SaveJobTitlePageObject);
-            page.EnterJobTitle(jobTitle);
-            page.EnterJobDescription(jobDescription);
-            page.EnterJobNote(jobNote);
-            currentPage = page.ClickSave();
+            saveJobTitleList.EnterJobTitle(jobTitle);
+            saveJobTitleList.EnterJobDescription(jobDescription);
+            saveJobTitleList.EnterJobNote(jobNote);
+            jobTitleList = saveJobTitleList.ClickSave();
         }
 
         [When(@"the admin delete a job with '([^']*)' through Delete Selected button")]
         public void WhenTheAdminDeleteAJobWithThroughDeleteSelectedButton(string jobTitle)
         {
-            (currentPage as JobTitleListPageObject).CheckCheckboxWithJobTitle(jobTitle);
-            currentPage.ScrollToTop();
-            currentPage = (currentPage as JobTitleListPageObject).DeleteSelected();
+            jobTitleList.CheckCheckboxWithJobTitle(jobTitle);
+            jobTitleList.ScrollToTop();
+            jobTitleList = jobTitleList.DeleteSelected();
         }
 
         [Then(@"a job with '([^']*)' and with '([^']*)' exist in table")]
         public void ThenAJobWithAndWithExistInTable(string jobTitle, string jobDescription)
         {
             Assert.That(RowWithTitleExistInTable(jobTitle));
-            string jobDescriptionOnSite = (currentPage as JobTitleListPageObject).GetJobDesctitionByJobTitle(jobTitle);
+            string jobDescriptionOnSite = jobTitleList.GetJobDesctitionByJobTitle(jobTitle);
             Assert.That(jobDescription.Contains(jobDescriptionOnSite.TrimStart()));
-            currentPage.Close();
         }
 
         [Then(@"row with '([^']*)' don`t exist in table")]
         public void ThenRowWithDonTExistInTable(string jobTitle)
         {
             Assert.That(!RowWithTitleExistInTable(jobTitle));
-            currentPage.Close();
         }
 
         private bool RowWithTitleExistInTable(string jobTitle)
         {
-            List<string> jobTitles = (currentPage as JobTitleListPageObject).GetListOfJobTitlesInTable();
+            List<string> jobTitles = jobTitleList.GetListOfJobTitlesInTable();
             return jobTitles.Contains(jobTitle);
         }
 
