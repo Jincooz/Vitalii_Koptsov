@@ -1,11 +1,10 @@
-﻿using OpenQA.Selenium.Support.UI;
-
-namespace SeleniumHomeTask.PageObjects
+﻿namespace SeleniumHomeTask.PageObjects
 {
     internal abstract class PageObject
     {
         protected readonly IWebDriver _webDriver;
         protected string _pageUrl;
+        public bool IsPageOpenedInDriverCorrespondsToThisPageObject => _webDriver.Url != _pageUrl;
         public PageObject(IWebDriver webDriver)
         {
             _webDriver = webDriver;
@@ -16,7 +15,11 @@ namespace SeleniumHomeTask.PageObjects
             _webDriver.Navigate().GoToUrl(_pageUrl);
             return this;
         }
-        public bool IsPageOpenedInDriverCorrespondsToThisPageObject => _webDriver.Url != _pageUrl; 
+        public void ScrollToTop()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)_webDriver;
+            js.ExecuteScript("window.scrollTo(0, 0)");
+        }
         protected IWebElement FindElement(By element)
         {
             if (IsPageOpenedInDriverCorrespondsToThisPageObject)
@@ -68,11 +71,6 @@ namespace SeleniumHomeTask.PageObjects
                     return false;
                 }
             });
-        }
-        public void ScrollToTop()
-        {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)_webDriver;
-            js.ExecuteScript("window.scrollTo(0, 0)");
         }
     }
 }

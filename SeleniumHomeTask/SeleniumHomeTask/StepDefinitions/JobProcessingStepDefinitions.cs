@@ -68,13 +68,11 @@ namespace SeleniumHomeTask.StepDefinitions
         {
             Assert.That(!RowWithTitleExistInTable(jobTitle));
         }
-
         private bool RowWithTitleExistInTable(string jobTitle)
         {
             List<string> jobTitles = jobTitleList.GetListOfJobTitlesInTable();
             return jobTitles.Contains(jobTitle);
         }
-
         private void CreateJobWithJobTitle(string jobTitle)
         {
             GivenTheAdminClickOnAddButton();

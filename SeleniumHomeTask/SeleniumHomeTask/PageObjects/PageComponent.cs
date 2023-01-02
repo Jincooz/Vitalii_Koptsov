@@ -7,17 +7,6 @@
         {
             _webElement = webElement;
         }
-        public bool isEnabled()
-        {
-            try
-            {
-                return _webElement.Enabled;
-            }
-            catch
-            {
-                return false;
-            }
-        }
         protected IWebElement FindElement(By element)
         {
             return _webElement.FindElement(element);

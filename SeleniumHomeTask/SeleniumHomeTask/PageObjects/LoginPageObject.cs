@@ -1,7 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Internal;
-
-namespace SeleniumHomeTask.PageObjects
+﻿namespace SeleniumHomeTask.PageObjects
 {
     internal class LoginPageObject : PageObject
     {
