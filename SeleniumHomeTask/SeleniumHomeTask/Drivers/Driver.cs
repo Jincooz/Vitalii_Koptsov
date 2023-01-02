@@ -27,7 +27,7 @@ namespace SeleniumHomeTask.Drivers
             }
         }
 
-        public static void StartBrowser(BrowserTypes browserType = BrowserTypes.Firefox)
+        public static void StartBrowser(BrowserTypes browserType = BrowserTypes.Chrome)
         {
             switch (browserType)
             {
