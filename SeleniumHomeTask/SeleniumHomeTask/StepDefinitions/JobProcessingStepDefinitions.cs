@@ -77,7 +77,6 @@ namespace SeleniumHomeTask.StepDefinitions
 
         private void CreateJobWithJobTitle(string jobTitle)
         {
-            GivenAAdminOnTheAdminViewJobTitleListPage();
             GivenTheAdminClickOnAddButton();
             WhenTheAdminSavesNewJobWithValidAnd(jobTitle, "", "");
         }
