@@ -5,7 +5,16 @@
         private readonly By _addButtonPath = By.ClassName("oxd-button");
         private readonly By _deleteSelectedButtonPath = By.ClassName("oxd-button--label-danger");
         private readonly By _popUpWindowPath = By.ClassName("orangehrm-dialog-popup");
-        private JobTitleListPageComponents.JobTablePageComponent? JobTable;//TODO: Add private property for lazy loading JobTable
+        private readonly By _jobTablePath = By.ClassName("oxd-table");
+        private JobTitleListPageComponents.JobTablePageComponent? _jobTable;
+        private JobTitleListPageComponents.JobTablePageComponent? JobTable
+        {
+            get 
+            { 
+                _jobTable ??= new JobTitleListPageComponents.JobTablePageComponent(FindElement(_jobTablePath));
+                return _jobTable;
+            }
+        }
         public JobTitleListPageObject(IWebDriver webDriver) : base(webDriver) 
         { 
             _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList"; 
@@ -17,17 +26,14 @@
         }
         public List<string> GetListOfJobTitlesInTable()
         {
-            InitializeJobTable();
             return JobTable.GetListOfJobTitles();
         }
         public string GetJobDesctitionByJobTitle(string jobTitle)
         {
-            InitializeJobTable();
             return JobTable.GetJobDesctitionByJobTitle(jobTitle);
         }
         public void CheckCheckboxWithJobTitle(string title)
         {
-            InitializeJobTable();
             JobTable.CheckCheckboxWithJobTitle(title);
         }
         public JobTitleListPageObject DeleteSelected()
@@ -35,10 +41,6 @@
             FindElement(_deleteSelectedButtonPath).Click();
             new JobTitleListPageComponents.DeletionPopUpWindowPageComponent(FindElement(_popUpWindowPath)).ClickDelete();
             return new JobTitleListPageObject(_webDriver);
-        }
-        private void InitializeJobTable()
-        {
-            JobTable ??= new(FindElement(By.ClassName("oxd-table")));
         }
     }
 }
