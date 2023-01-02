@@ -5,6 +5,5 @@
         Firefox,
         InternetExplorer,
         Chrome,
-        NotSet,
     }
 }
