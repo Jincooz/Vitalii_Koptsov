@@ -2,13 +2,15 @@
 {
     internal class LoginPageObject : PageObject
     {
-        private static readonly string _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
         private IWebElement UsernameTextBox => FindElement(By.CssSelector("input.oxd-input[name=username]"));
         private IWebElement PasswordTextBox => FindElement(By.CssSelector("input.oxd-input[name=password]"));
         private IWebElement UsernameElement => FindElements(By.CssSelector("p.oxd-text"))[0];
         private IWebElement PasswordElement => FindElements(By.CssSelector("p.oxd-text"))[1];
         private IWebElement LoginButton => FindElement(By.ClassName("oxd-button"));
-        public LoginPageObject(IWebDriver webDriver) : base(webDriver, _pageUrl) { }
+        public LoginPageObject(IWebDriver webDriver) : base(webDriver)
+        {
+            _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        }
         public void EnterUsername(string? username = null)
         {
             if (username == null)

@@ -2,10 +2,12 @@
 {
     internal class SystemUsersPageObject : PageObject
     {
-        private static readonly string _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
         private IWebElement JobTitle => FindElements(By.ClassName("oxd-topbar-body-nav-tab"))[1];
         private AdminJobDropDownMenuPageComponent? JobMenu;
-        public SystemUsersPageObject(IWebDriver webDriver) : base(webDriver, _pageUrl) { }
+        public SystemUsersPageObject(IWebDriver webDriver) : base(webDriver)
+        {
+            _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
+        }
         public JobTitleListPageObject OpenJobTitleList()
         {
             JobTitle.Click();

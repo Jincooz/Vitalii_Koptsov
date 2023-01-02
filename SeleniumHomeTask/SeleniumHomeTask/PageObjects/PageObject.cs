@@ -5,10 +5,9 @@ namespace SeleniumHomeTask.PageObjects
     internal abstract class PageObject
     {
         protected readonly IWebDriver _webDriver;
-        private string _pageUrl;
-        public PageObject(IWebDriver webDriver, string pageUrl)
+        protected string _pageUrl;
+        public PageObject(IWebDriver webDriver)
         {
-            _pageUrl = pageUrl;
             _webDriver = webDriver;
         }
         public PageObject GoTo()
@@ -16,7 +15,7 @@ namespace SeleniumHomeTask.PageObjects
             _webDriver.Navigate().GoToUrl(_pageUrl);
             return this;
         }
-        public bool isValidToPageObject => _webDriver.Url != _pageUrl;
+        public bool isValidToPageObject => _webDriver.Url != _pageUrl; //TODO: change name
         protected IWebElement FindElement(By element)
         {
             if (isValidToPageObject)
@@ -73,10 +72,6 @@ namespace SeleniumHomeTask.PageObjects
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)_webDriver;
             js.ExecuteScript("window.scrollTo(0, 0)");
-        }
-        public void Close()
-        {
-            _webDriver.Quit();
         }
     }
 }

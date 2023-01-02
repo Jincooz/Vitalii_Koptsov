@@ -2,12 +2,14 @@
 {
     internal class JobTitleListPageObject : PageObject
     {
-        private static readonly string _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList";
         private IWebElement AddButton => FindElement(By.ClassName("oxd-button"));
         private IWebElement DeleteSelectedButton => FindElement(By.ClassName("oxd-button--label-danger"));
         private IWebElement PopUpWindow => FindElement(By.ClassName("orangehrm-dialog-popup"));
         private JobTitleListPageComponents.JobTablePageComponent? JobTable;
-        public JobTitleListPageObject(IWebDriver webDriver) : base(webDriver, _pageUrl) { }
+        public JobTitleListPageObject(IWebDriver webDriver) : base(webDriver) 
+        { 
+            _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList"; 
+        }
         public SaveJobTitlePageObject ClickAdd()
         {
             AddButton.Click();
