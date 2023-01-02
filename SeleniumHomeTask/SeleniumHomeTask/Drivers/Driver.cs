@@ -43,6 +43,7 @@ namespace SeleniumHomeTask.Drivers
                 default:
                     break;
             }
+            Browser.Manage().Window.Maximize();
         }
 
         public static void StopBrowser()
