@@ -8,8 +8,8 @@ namespace SeleniumHomeTask.StepDefinitions
     [Binding]
     public sealed class JobProcessingStepDefinitions
     {
-        private JobTitleListPageObject? jobTitleList;
-        private SaveJobTitlePageObject? saveJobTitleList;
+        private JobTitleListPageObject jobTitleList;
+        private SaveJobTitlePageObject saveJobTitleList;
 
         [Given(@"a admin on the admin viewJobTitleList page")]
         public void GivenAAdminOnTheAdminViewJobTitleListPage()
