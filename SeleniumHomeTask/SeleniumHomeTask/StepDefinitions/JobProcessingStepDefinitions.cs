@@ -32,7 +32,7 @@ namespace SeleniumHomeTask.StepDefinitions
         [Given(@"a job with (.*) exist in table")]
         public void GivenAJobWithExistInTable(string jobTitle)
         {
-            if (!(jobTitleList).GetListOfJobTitlesInTable().Contains(jobTitle))
+            if (!jobTitleList.GetListOfJobTitlesInTable().Contains(jobTitle))
             {
                 CreateJobWithJobTitle(jobTitle);
             }

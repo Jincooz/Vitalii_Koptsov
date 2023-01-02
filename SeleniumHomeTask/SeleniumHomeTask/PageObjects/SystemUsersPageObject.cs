@@ -17,10 +17,7 @@
         }
         private void InitializeJobMenu()
         {
-            if (JobMenu == null)
-            {
-                JobMenu = new AdminJobDropDownMenuPageComponent(FindElement(By.XPath("//*[@id=\"app\"]/div[1]/div[1]/header/div[2]/nav/ul/li[2]/ul")));
-            }
+            JobMenu ??= new AdminJobDropDownMenuPageComponent(FindElement(By.XPath("//*[@id=\"app\"]/div[1]/div[1]/header/div[2]/nav/ul/li[2]/ul")));
         }
     }
 }

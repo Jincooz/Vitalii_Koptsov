@@ -38,8 +38,7 @@
         }
         private void InitializeJobTable()
         {
-            if (JobTable == null)
-                JobTable = new(FindElement(By.ClassName("oxd-table")));
+            JobTable ??= new(FindElement(By.ClassName("oxd-table")));
         }
     }
 }

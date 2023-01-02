@@ -9,6 +9,7 @@ namespace SeleniumHomeTask.PageObjects
         public PageObject(IWebDriver webDriver)
         {
             _webDriver = webDriver;
+            _pageUrl = "";
         }
         public PageObject GoTo()
         {
@@ -56,7 +57,7 @@ namespace SeleniumHomeTask.PageObjects
         }
         private void WaitUntilObjectLoad(By element)
         {
-            WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new(_webDriver, TimeSpan.FromSeconds(10));
             wait.Until(d => {
                 try
                 {
