@@ -11,7 +11,7 @@ namespace SeleniumHomeTask.StepDefinitions
             Environment.CurrentDirectory = Path.GetDirectoryName(Directory.GetCurrentDirectory());
         }
         [BeforeScenario]
-        public static void SetupScenario()
+        public static void OpenBrowser()
         {
             Driver.StartBrowser();
         }
