@@ -2,17 +2,17 @@
 {
     internal class JobTitleListPageObject : PageObject
     {
-        private IWebElement AddButton => FindElement(By.ClassName("oxd-button"));
-        private IWebElement DeleteSelectedButton => FindElement(By.ClassName("oxd-button--label-danger"));
-        private IWebElement PopUpWindow => FindElement(By.ClassName("orangehrm-dialog-popup"));
-        private JobTitleListPageComponents.JobTablePageComponent? JobTable;
+        private readonly By _addButtonPath = By.ClassName("oxd-button");
+        private readonly By _deleteSelectedButtonPath = By.ClassName("oxd-button--label-danger");
+        private readonly By _popUpWindowPath = By.ClassName("orangehrm-dialog-popup");
+        private JobTitleListPageComponents.JobTablePageComponent? JobTable;//TODO: Add private property for lazy loading JobTable
         public JobTitleListPageObject(IWebDriver webDriver) : base(webDriver) 
         { 
             _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList"; 
         }
         public SaveJobTitlePageObject ClickAdd()
         {
-            AddButton.Click();
+            FindElement(_addButtonPath).Click();
             return new SaveJobTitlePageObject(_webDriver);
         }
         public List<string> GetListOfJobTitlesInTable()
@@ -32,8 +32,8 @@
         }
         public JobTitleListPageObject DeleteSelected()
         {
-            DeleteSelectedButton.Click();
-            new JobTitleListPageComponents.DeletionPopUpWindowPageComponent(PopUpWindow).ClickDelete();
+            FindElement(_deleteSelectedButtonPath).Click();
+            new JobTitleListPageComponents.DeletionPopUpWindowPageComponent(FindElement(_popUpWindowPath)).ClickDelete();
             return new JobTitleListPageObject(_webDriver);
         }
         private void InitializeJobTable()

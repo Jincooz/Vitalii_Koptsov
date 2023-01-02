@@ -2,32 +2,34 @@
 {
     internal class SaveJobTitlePageObject : PageObject
     {
-        private IWebElement JobTitleTextBox => FindElement(By.XPath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input"));
-        private IWebElement JobDescriptionTextBox => FindElements(By.ClassName("oxd-textarea"))[0];
-        private IWebElement NoteTextBox => FindElements(By.ClassName("oxd-textarea"))[1];
-        private IWebElement SaveButton => FindElement(By.ClassName("orangehrm-left-space"));
+        private readonly By _jobTitleTextBoxPath = By.XPath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+        private readonly By _textBoxesPath = By.ClassName("oxd-textarea");
+        private readonly By _saveButtonPath = By.ClassName("orangehrm-left-space");
         public SaveJobTitlePageObject(IWebDriver webDriver) : base(webDriver)
         {
             _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveJobTitle";
         }
         public void EnterJobTitle(string title)
         {
-            JobTitleTextBox.Clear();
-            JobTitleTextBox.SendKeys(title);
+            IWebElement jobTitleTextBox = FindElement(_jobTitleTextBoxPath);
+            jobTitleTextBox.Clear();
+            jobTitleTextBox.SendKeys(title);
         }
         public void EnterJobDescription(string description)
         {
-            JobDescriptionTextBox.Clear();
-            JobDescriptionTextBox.SendKeys(description);
+            IWebElement jobDescriptionTextBox = FindElements(_textBoxesPath)[0];
+            jobDescriptionTextBox.Clear();
+            jobDescriptionTextBox.SendKeys(description);
         }
         public void EnterJobNote(string note)
         {
-            NoteTextBox.Clear();
-            NoteTextBox.SendKeys(note);
+            IWebElement noteTextBox = FindElements(_textBoxesPath)[1];
+            noteTextBox.Clear();
+            noteTextBox.SendKeys(note);
         }
         public JobTitleListPageObject ClickSave()
         {
-            SaveButton.Click();
+            FindElement(_saveButtonPath).Click();
             return new JobTitleListPageObject(_webDriver);
         }
     }

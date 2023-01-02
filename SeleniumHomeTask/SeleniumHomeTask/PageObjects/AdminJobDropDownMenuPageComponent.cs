@@ -2,11 +2,11 @@
 {
     internal class AdminJobDropDownMenuPageComponent : PageComponent
     {
-        private IWebElement JobTitlesReference => FindElement(By.ClassName("oxd-topbar-body-nav-tab-link"));
+        private readonly By _jobTitlesReferencePath = By.ClassName("oxd-topbar-body-nav-tab-link");
         public AdminJobDropDownMenuPageComponent(IWebElement webElement) : base(webElement) { }
         public void OpenJobTitleList()
         {
-            JobTitlesReference.Click();
+            FindElement(_jobTitlesReferencePath).Click();
         }
     }
 }

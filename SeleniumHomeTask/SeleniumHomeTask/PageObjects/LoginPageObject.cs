@@ -1,12 +1,14 @@
-﻿namespace SeleniumHomeTask.PageObjects
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
+
+namespace SeleniumHomeTask.PageObjects
 {
     internal class LoginPageObject : PageObject
     {
-        private IWebElement UsernameTextBox => FindElement(By.CssSelector("input.oxd-input[name=username]"));
-        private IWebElement PasswordTextBox => FindElement(By.CssSelector("input.oxd-input[name=password]"));
-        private IWebElement UsernameElement => FindElements(By.CssSelector("p.oxd-text"))[0];
-        private IWebElement PasswordElement => FindElements(By.CssSelector("p.oxd-text"))[1];
-        private IWebElement LoginButton => FindElement(By.ClassName("oxd-button"));
+        private readonly By _usernameTextBoxPath = By.CssSelector("input.oxd-input[name=username]");
+        private readonly By _passwordTextBoxPath = By.CssSelector("input.oxd-input[name=password]");
+        private readonly By _autorizationDataPath = By.CssSelector("p.oxd-text");
+        private readonly By _loginButtonPath = By.ClassName("oxd-button");
         public LoginPageObject(IWebDriver webDriver) : base(webDriver)
         {
             _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
@@ -15,23 +17,27 @@
         {
             if (username == null)
             {
-                username = UsernameElement.Text.Split(' ')[2];
+                IWebElement usernameElement = FindElements(_autorizationDataPath)[0];
+                username = usernameElement.Text.Split(' ')[2];
             }
-            UsernameTextBox.Clear();
-            UsernameTextBox.SendKeys(username);
+            IWebElement usernameTextBox = FindElement(_usernameTextBoxPath);
+            usernameTextBox.Clear();
+            usernameTextBox.SendKeys(username);
         }
         public void EnterPassword(string? password = null)
         {
             if (password == null)
             {
-                password = PasswordElement.Text.Split(' ')[2];
+                IWebElement passwordElement = FindElements(_autorizationDataPath)[1];
+                password = passwordElement.Text.Split(' ')[2];
             }
-            PasswordTextBox.Clear();
-            PasswordTextBox.SendKeys(password);
+            IWebElement passwordTextBox = FindElement(_passwordTextBoxPath);
+            passwordTextBox.Clear();
+            passwordTextBox.SendKeys(password);
         }
         public DashboardPageObject ClickLogin()
         {
-            LoginButton.Click();
+            FindElement(_loginButtonPath).Click();
             return new DashboardPageObject(_webDriver);
         }
     }

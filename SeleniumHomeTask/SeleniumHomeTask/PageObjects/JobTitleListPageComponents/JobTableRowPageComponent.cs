@@ -2,15 +2,19 @@
 {
     internal class JobTableRowPageComponent : PageComponent
     {
-        public IWebElement CheckBox => FindElement(By.XPath("div[1]/div"));
+        private readonly By _jobTitlePath = By.XPath("div[2]/div");
+        private readonly By _jobDescriptionPath = By.XPath("div[3]/div");
+        private readonly By _checkBoxPath = By.XPath("div[1]/div");
+        private readonly By _buttonsPath = By.ClassName("oxd-icon-button");
         public string JobTitle { get; }
         public string JobDescription { get; }
-        public IWebElement DeleteButton => FindElements(By.ClassName("oxd-icon-button"))[0];
-        public IWebElement EditButton => FindElements(By.ClassName("oxd-icon-button"))[1];
+        public IWebElement CheckBox => FindElement(_checkBoxPath);
+        public IWebElement DeleteButton => FindElements(_buttonsPath)[0];
+        public IWebElement EditButton => FindElements(_buttonsPath)[1];
         public JobTableRowPageComponent(IWebElement row) : base(row)
         {
-            JobTitle = FindElement(By.XPath("div[2]/div")).Text;
-            JobDescription = FindElement(By.XPath("div[3]/div")).Text;
+            JobTitle = FindElement(_jobTitlePath).Text;
+            JobDescription = FindElement(_jobDescriptionPath).Text;
         }
         public bool IsChecked()
         {

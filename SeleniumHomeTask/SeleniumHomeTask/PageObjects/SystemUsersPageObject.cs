@@ -2,15 +2,15 @@
 {
     internal class SystemUsersPageObject : PageObject
     {
-        private IWebElement JobTitle => FindElements(By.ClassName("oxd-topbar-body-nav-tab"))[1];
-        private AdminJobDropDownMenuPageComponent? JobMenu;
+        private readonly By _topMenuPath = By.ClassName("oxd-topbar-body-nav-tab");
+        private AdminJobDropDownMenuPageComponent? JobMenu;//TODO: Add private property for lazy loading JobMenu
         public SystemUsersPageObject(IWebDriver webDriver) : base(webDriver)
         {
             _pageUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
         }
         public JobTitleListPageObject OpenJobTitleList()
         {
-            JobTitle.Click();
+            FindElements(_topMenuPath)[1].Click();
             InitializeJobMenu();
             JobMenu.OpenJobTitleList();
             return new JobTitleListPageObject(_webDriver);
