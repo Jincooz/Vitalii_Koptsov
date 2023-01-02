@@ -15,10 +15,10 @@ namespace SeleniumHomeTask.PageObjects
             _webDriver.Navigate().GoToUrl(_pageUrl);
             return this;
         }
-        public bool isValidToPageObject => _webDriver.Url != _pageUrl; //TODO: change name
+        public bool IsPageOpenedInDriverCorrespondsToThisPageObject => _webDriver.Url != _pageUrl; 
         protected IWebElement FindElement(By element)
         {
-            if (isValidToPageObject)
+            if (IsPageOpenedInDriverCorrespondsToThisPageObject)
             {
                 WaitUntilObjectLoad(element);
                 if (_webDriver.Url != _pageUrl)
@@ -36,7 +36,7 @@ namespace SeleniumHomeTask.PageObjects
         }
         protected List<IWebElement> FindElements(By element)
         {
-            if (isValidToPageObject)
+            if (IsPageOpenedInDriverCorrespondsToThisPageObject)
             {
                 throw new InvalidElementStateException("This is not " + _pageUrl + " current page is: " + _webDriver.Url);
             }
