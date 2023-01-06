@@ -114,7 +114,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
                     Assert.Fail();
                 }
             }
-            Assert.Pass();
+            Assert.That(true);
         }
 
         [Then(@"I don`t have file in disk with (.*)")]
