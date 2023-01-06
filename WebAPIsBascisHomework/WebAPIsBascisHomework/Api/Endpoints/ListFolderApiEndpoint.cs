@@ -12,7 +12,7 @@ namespace WebAPIsBascisHomework.Api
     {
         public ListFolderApiEndpoint(Dictionary<string, string> body)
         {
-            _url = Configuration.Configs["ListFolderApiUrl"];
+            _url = Configuration.ListFolderApiUrl;
             HttpPostDictionary postDictionary = new HttpPostDictionary()
             {
                 Url = _url

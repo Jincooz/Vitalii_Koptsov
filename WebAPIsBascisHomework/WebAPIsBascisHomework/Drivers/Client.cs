@@ -23,7 +23,7 @@ namespace WebAPIsBascisHomework.Drivers
         }
         private void GetToken()
         {
-            _token = Configuration.Configs["Token"];
+            _token = Configuration.Token;
         }
         public HttpResponseMessage Post(HttpRequestMessage webRequest)
         {

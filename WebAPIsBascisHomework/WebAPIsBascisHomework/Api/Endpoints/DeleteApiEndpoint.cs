@@ -11,7 +11,7 @@ namespace WebAPIsBascisHomework.Api
     {
         public DeleteApiEndpoint(Dictionary<string,string> body) 
         {
-            _url = Configuration.Configs["DeleteApiUrl"];
+            _url = Configuration.DeleteApiUrl;
             HttpPostDictionary postDictionary = new HttpPostDictionary()
             {
                 Url = _url

@@ -12,7 +12,7 @@ namespace WebAPIsBascisHomework.Api
     {
         public GetMetadataApiEndpoint(Dictionary<string, string> body)
         {
-            _url = Configuration.Configs["GetMetadataApiUrl"];
+            _url = Configuration.GetMetadataApiUrl;
             HttpPostDictionary postDictionary = new HttpPostDictionary()
             {
                 Url = _url

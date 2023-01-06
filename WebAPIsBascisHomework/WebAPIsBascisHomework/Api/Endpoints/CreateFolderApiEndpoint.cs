@@ -11,7 +11,7 @@ namespace WebAPIsBascisHomework.Api
     {
         public CreateFolderApiEndpoint(Dictionary<string, string> body) 
         {
-            _url = Configuration.Configs["CreateFolderApiUrl"];
+            _url = Configuration.CreateFolderApiUrl;
             HttpPostDictionary postDictionary = new HttpPostDictionary()
             {
                 Url = _url
