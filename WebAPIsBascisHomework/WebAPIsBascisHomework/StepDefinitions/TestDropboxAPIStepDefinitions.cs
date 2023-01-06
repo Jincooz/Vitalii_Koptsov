@@ -19,12 +19,12 @@ namespace WebAPIsBascisHomework.StepDefinitions
         private ApiEndpoint _endpoint;
         private ApiEndPointResult _response;
         private string _lastUploadMetadata;
-        private string _testFilePath = Directory.GetCurrentDirectory() + @"\Resource\Test.txt";
+        private readonly string _testFilePathh = Directory.GetCurrentDirectory() + @"\Resource\Test.txt";
 
         [Given(@"I set body for upload file to (.*)")]
         public void GivenISetBodyForUploadFileFromA_TxtToMy_Txt(string dropboxFileName)
         {
-            byte[] file = File.ReadAllBytes(_testFilePath);
+            byte[] file = File.ReadAllBytes(_testFilePathh);
             _endpoint = new UploadApiEndpoint(file, dropboxFileName);
         }
 
@@ -124,7 +124,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
             Assert.That(!files.Contains(filename));
         }
 
-        public List<string> GetAllFilesInDiskNames()
+        public static List<string> GetAllFilesInDiskNames()
         {
             Dictionary<string, string> content = new()
             {

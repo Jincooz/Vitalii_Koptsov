@@ -9,8 +9,8 @@ namespace WebAPIsBascisHomework.Api
 {
     internal class ApiEndPointResult
     {
-        private HttpStatusCode _statusCode;
-        private string _body;
+        private readonly HttpStatusCode _statusCode;
+        private readonly string _body;
         public HttpStatusCode StatusCode { get { return _statusCode;} }
         public string Body { get { return _body; } }
         public ApiEndPointResult(HttpResponseMessage httpResponseMessage)

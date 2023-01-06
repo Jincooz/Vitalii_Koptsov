@@ -12,7 +12,7 @@ namespace WebAPIsBascisHomework.Api
         public UploadApiEndpoint(byte[] file, string dropboxFileName) 
         {
             _url = Configuration.Configs["UploadApiUrl"];
-            HttpPostFile postFile = new HttpPostFile()
+            HttpPostFile postFile = new()
             {
                 Url = _url
             };

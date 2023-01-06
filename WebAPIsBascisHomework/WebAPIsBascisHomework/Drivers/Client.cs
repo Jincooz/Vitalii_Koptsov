@@ -7,9 +7,9 @@ namespace WebAPIsBascisHomework.Drivers
 {
     internal class Client
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
         private static string _token = string.Empty;
-        private static Client _client = new Client();
+        private static Client _client = new();
         public static Client Instance
         {
             get 

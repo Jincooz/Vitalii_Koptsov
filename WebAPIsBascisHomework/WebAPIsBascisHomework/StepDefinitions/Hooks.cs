@@ -9,7 +9,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
         [BeforeFeature]
         public static void CreateFolder()
         {
-            HttpPostDictionary httpPost = new HttpPostDictionary()
+            HttpPostDictionary httpPost = new()
             {
                 Url = "https://api.dropboxapi.com/2/files/create_folder_v2",
             };
@@ -23,7 +23,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
         [AfterFeature]
         public static void DeleteFolder()
         {
-            HttpPostDictionary httpPost = new HttpPostDictionary()
+            HttpPostDictionary httpPost = new()
             {
                 Url = "https://api.dropboxapi.com/2/files/delete_v2",
             };
