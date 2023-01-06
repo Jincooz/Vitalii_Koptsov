@@ -1,4 +1,5 @@
 ﻿using TechTalk.SpecFlow;
+using WebAPIsBascisHomework.Api;
 using WebAPIsBascisHomework.Drivers;
 
 namespace WebAPIsBascisHomework.StepDefinitions
@@ -9,30 +10,22 @@ namespace WebAPIsBascisHomework.StepDefinitions
         [BeforeFeature]
         public static void CreateFolder()
         {
-            HttpPostDictionary httpPost = new()
-            {
-                Url = "https://api.dropboxapi.com/2/files/create_folder_v2",
-            };
             Dictionary<string, string> content = new()
             {
                 {"path", ""}
             };
-            httpPost.AddDictionary(content);
-            httpPost.Post();
+            ApiEndpoint endpoint = ApiStaicFactory.GetCreateFolderApi(content);
+            endpoint.Post();
         }
         [AfterFeature]
         public static void DeleteFolder()
         {
-            HttpPostDictionary httpPost = new()
-            {
-                Url = "https://api.dropboxapi.com/2/files/delete_v2",
-            };
             Dictionary<string, string> content = new()
             {
                 {"path", ""}
             };
-            httpPost.AddDictionary(content);
-            httpPost.Post();
+            ApiEndpoint endpoint = ApiStaicFactory.GetDeleteApi(content);
+            endpoint.Post();
         }
     }
 }

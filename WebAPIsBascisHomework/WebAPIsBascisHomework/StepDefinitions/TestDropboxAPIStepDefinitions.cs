@@ -25,7 +25,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
         public void GivenISetBodyForUploadFileFromA_TxtToMy_Txt(string dropboxFileName)
         {
             byte[] file = File.ReadAllBytes(_testFilePathh);
-            _endpoint = new UploadApiEndpoint(file, dropboxFileName);
+            _endpoint = ApiStaicFactory.GetUploadApi(file, dropboxFileName);
         }
 
         [Given(@"I set body for delete file by (.*)")]
@@ -35,7 +35,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
             {
                 {"path", "/" + dropboxFileName}
             };
-            _endpoint = new DeleteApiEndpoint(content);
+            _endpoint = ApiStaicFactory.GetDeleteApi(content);
         }
 
         [Given(@"I set body for get metadata file from (.*)")]
@@ -45,7 +45,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
             {
                 {"path", "/" + dropboxFileName}
             };
-            _endpoint = new GetMetadataApiEndpoint(content);
+            _endpoint = ApiStaicFactory.GetMetadataApi(content);
         }
 
         [Given(@"I don`t have file in disk with (.*)")]
@@ -130,7 +130,7 @@ namespace WebAPIsBascisHomework.StepDefinitions
             {
                 {"path", ""}
             };
-            ApiEndpoint endpoint = new ListFolderApiEndpoint(content);
+            ApiEndpoint endpoint = ApiStaicFactory.GetListFolderApi(content);
             ListFolderApiEndpointResult response = (endpoint.Post() as ListFolderApiEndpointResult);
             if (response.StatusCode != HttpStatusCode.OK)
             {
